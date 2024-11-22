@@ -47,18 +47,10 @@ function cipherCesarAlgorithm(text, code, vetor) {
     }
     finalCipherIndex = cipherIndex;
     if (cipherIndex > 25) {
-      const rest = cipherIndex / 25 - Math.floor(cipherIndex / 25);
-      finalCipherIndex = parseInt(parseFloat(rest.toFixed(2)) * 25);
+      finalCipherIndex = cipherIndex % 26;
     }
     if (cipherIndex < 0) {
-      const rest = cipherIndex / 25 + Math.ceil(cipherIndex / 25) * -1;
-      finalCipherIndex = parseInt(
-        parseInt(parseFloat(rest.toFixed(2)) * 25) + 25
-      );
-
-      if (rest === 0) {
-        finalCipherIndex = 0;
-      }
+      finalCipherIndex = cipherIndex % 26 ? cipherIndex % 26 + 26 : 0;
     }
 
     cipher.push(alphabetIndex !== -1 ? alphabet[finalCipherIndex] : "-");
@@ -76,6 +68,13 @@ function removeAccents(text) {
   return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-cipherCesarAlgorithm("texto to encrypt", "number list", "encrypt");
-
-cipherCesarAlgorithm("cipher to decrypt", "number list", "decrypt");
+cipherCesarAlgorithm(
+  "<text>",
+  "<numberlist>",
+  "encrypt"
+);
+cipherCesarAlgorithm(
+  "<cipher>",
+  "<numberlist>",
+  "decrypt"
+);
